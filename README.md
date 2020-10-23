@@ -1,5 +1,5 @@
 # DockerFlask
-Simple Flask on Docker
+Simple Flask in Docker
 
 ### Instructions:  
 #### 1. Build the image:  
