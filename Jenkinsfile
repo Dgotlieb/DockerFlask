@@ -24,11 +24,14 @@ pipeline {
             
             steps {
                 script {
-                    dockerImage = docker.build("${registry}:${BUILD_NUMBER}") // give a name and version to the image
+                    echo "Building Docker Image: ${registry}:${BUILD_NUMBER}"
+                    dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
+                    echo "Pushing Docker Image: ${registry}:${BUILD_NUMBER}"
                     docker.withRegistry("", registryCredential) {
-                        dockerImage.push() // push image to hub
+                        dockerImage.push()
                     }
                 }
+
             }
             post {
                 always {
