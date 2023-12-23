@@ -26,6 +26,7 @@ pipeline {
                 script {
                     echo "Building Docker Image: ${registry}:${BUILD_NUMBER}"
                     dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
+                    echo dockerImage
                     echo "Pushing Docker Image: ${registry}:${BUILD_NUMBER}"
                     docker.withRegistry("", registryCredential) {
                         dockerImage.push()
