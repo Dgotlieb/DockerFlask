@@ -1,8 +1,8 @@
 pipeline {
     environment {
     DOCKERHUB_CREDS = credentials('docker-hub') // added in Jenkins as docker-hub user/password type
-    registry = ${DOCKERHUB_CREDS_USR} // The name of your user and repository (which can be created manually)
-    registryCredential = ${DOCKERHUB_CREDS_PSW} // The credentials used to your repo added in manage jenkins
+    registry = '${DOCKERHUB_CREDS_USR}' // The name of your user and repository (which can be created manually)
+    registryCredential = '${DOCKERHUB_CREDS_PSW}' // The credentials used to your repo added in manage jenkins
     dockerImage = "" // will be overridden later
   }
     stages{
@@ -16,7 +16,7 @@ pipeline {
                 steps {
                    script {
                         dockerImage = docker.build registry + ":$BUILD_NUMBER" // give a name and version to image
-                        docker.withRegistry("", registryCredential) {
+                        docker.withRegistry('', registryCredential) {
                             dockerImage.push() // push image to hub
                         }
                 }
