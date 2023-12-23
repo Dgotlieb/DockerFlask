@@ -15,7 +15,13 @@ pipeline {
                     url: 'https://github.com/raksoq/DockerFlask.git')
             }
         }
+        stage('Check Docker Daemon Status') {
+            steps {
+                sh 'docker info'
+            }
+        }
         stage('build and push image') {
+            
             steps {
                 script {
                     dockerImage = docker.build("${registry}:${BUILD_NUMBER}") // give a name and version to the image
