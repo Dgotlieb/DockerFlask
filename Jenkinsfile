@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Check Docker Daemon Status') {
             steps {
-                sh 'docker info'
+                sh 'docker version'
             }
         }
         stage('build and push image') {
@@ -26,7 +26,7 @@ pipeline {
                 script {
                     echo "Building Docker Image: ${registry}:${BUILD_NUMBER}"
                     dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
-                    echo dockerImage
+                    echo "dockerImage: ${dockerImage}"
                     echo "Pushing Docker Image: ${registry}:${BUILD_NUMBER}"
                     docker.withRegistry("", registryCredential) {
                         dockerImage.push()
