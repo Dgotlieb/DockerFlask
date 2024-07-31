@@ -5,7 +5,6 @@ from flask import Flask
 
 app = Flask(__name__)
 
-
 @app.route('/hello/<user_name>')
 def user(user_name):
     now = str(datetime.datetime.now())
